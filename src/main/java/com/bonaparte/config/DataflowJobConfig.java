@@ -1,5 +1,6 @@
 package com.bonaparte.config;
 
+import com.bonaparte.service.DataFlowJobSecond;
 import com.bonaparte.service.SpringDataflowJob;
 import com.dangdang.ddframe.job.api.dataflow.DataflowJob;
 import com.dangdang.ddframe.job.config.JobCoreConfiguration;
@@ -29,7 +30,7 @@ public class DataflowJobConfig {
 
     @Bean
     public DataflowJob dataflowJob() {
-        return new SpringDataflowJob();
+        return new DataFlowJobSecond();
     }
 
     @Bean(initMethod = "init")
