@@ -1,5 +1,6 @@
 package com.bonaparte.config;
 
+import com.bonaparte.listener.ElasticJobListener;
 import com.bonaparte.service.ElasticJobFirst;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import com.dangdang.ddframe.job.config.JobCoreConfiguration;
@@ -38,7 +39,7 @@ public class ElasticJobFirstConfig {
                                            @Value("${elasticJob.shardingTotalCount}") final int shardingTotalCount,
                                            @Value("${elasticJob.shardingItemParameters}") final String shardingItemParameters){
         return new SpringJobScheduler(simpleJob, zookeeperRegistryCenter, getLiteJobConfiguration(simpleJob.getClass(),
-                cron, shardingTotalCount, shardingItemParameters));
+                cron, shardingTotalCount, shardingItemParameters), new ElasticJobListener(100, 100));
     }
 
     public LiteJobConfiguration getLiteJobConfiguration(final Class<? extends SimpleJob> jobClass,
