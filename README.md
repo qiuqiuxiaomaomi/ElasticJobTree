@@ -75,3 +75,7 @@ Elastic Job
 
           这种特性称之为弹性扩容，即elastic-job名称的由来
 </pre>
+
+<pre>
+Zookeeper分片
+</pre>
