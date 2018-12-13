@@ -1,8 +1,6 @@
 package com.bonaparte.bean;
 
-import com.bonaparte.entity.Foo;
-import io.swagger.models.auth.In;
-import org.springframework.stereotype.Component;
+import com.bonaparte.entity.TaskRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class FooRepository {
 
-    private Map<Long, Foo> data = new ConcurrentHashMap<>(300, 1);
+    private Map<Long, TaskRepository> data = new ConcurrentHashMap<>(300, 1);
 
     public FooRepository() {
         init();
@@ -30,16 +28,16 @@ public class FooRepository {
 
     private void addData(final long idFrom, final long idTo, final String location) {
         for (long i = idFrom; i < idTo; i++) {
-            data.put(i, new Foo(i, location, Foo.Status.TODO));
+            data.put(i, new TaskRepository(i, location, TaskRepository.Status.TODO));
         }
     }
 
-    public List<Foo> findTodoData(final String location, final int limit) {
-        List<Foo> result = new ArrayList<>(limit);
+    public List<TaskRepository> findTodoData(final String location, final int limit) {
+        List<TaskRepository> result = new ArrayList<>(limit);
         int count = 0;
-        for (Map.Entry<Long, Foo> each : data.entrySet()) {
-            Foo foo = each.getValue();
-            if (foo.getLocation().equals(location) && foo.getStatus() == Foo.Status.TODO) {
+        for (Map.Entry<Long, TaskRepository> each : data.entrySet()) {
+            TaskRepository foo = each.getValue();
+            if (foo.getLocation().equals(location) && foo.getStatus() == TaskRepository.Status.TODO) {
                 result.add(foo);
                 count++;
                 if (count == limit){
@@ -51,6 +49,6 @@ public class FooRepository {
     }
 
     public void setCompleted(final long id) {
-        data.get(id).setStatus(Foo.Status.COMPLETED);
+        data.get(id).setStatus(TaskRepository.Status.COMPLETED);
     }
 }

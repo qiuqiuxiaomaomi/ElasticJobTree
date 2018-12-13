@@ -1,8 +1,11 @@
 package com.bonaparte.config;
 
+import com.bonaparte.constant.BonaparteProps;
 import com.bonaparte.listener.ElasticJobListener;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
+import com.netflix.discovery.converters.Auto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,11 +15,12 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ElasticConfig {
+    @Autowired
+    private BonaparteProps bonaparteProps;
 
     @Bean(initMethod = "init")
-    public ZookeeperRegistryCenter registryCenter(@Value("${elasticjob.zookeeper.server-lists}") String server,
-                                                  @Value("${elasticjob.zookeeper.namespace}") String namespace){
-        return new ZookeeperRegistryCenter(new ZookeeperConfiguration(server, namespace));
+    public ZookeeperRegistryCenter registryCenter(){
+        return new ZookeeperRegistryCenter(new ZookeeperConfiguration(bonaparteProps.getServerlists(), bonaparteProps.getNamespace()));
     }
 
     @Bean
