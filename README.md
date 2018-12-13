@@ -78,4 +78,22 @@ Elastic Job
 
 <pre>
 Zookeeper分片
+
+      业务迅速发展带来了跑批数据量的急剧增加。单机处理跑批数据已不能满足需要，另考虑到企业处
+      理数据的扩展能力，多机跑批势在必行。多机跑批是指将跑批任务分发到多台服务器上执行，多机
+      跑批的前提是”数据分片”。elasticJob通过JobShardingStrategy支持分片跑批。
+
+      ElasticJob 默认提供了如下三种分片策略：
+             1）AverageAllocationJobShardingStrategy:
+                基于平均算法的分片策略；
+             2）OdevitySortByNameJobShardingStrategy:
+                根据作业名的哈希值奇偶数决定IP升降序算法的分片策略
+             3）RotateServerByNameJobShardingStrategy:
+                根据作业名的哈希值对服务器列表进行轮转的分片策略
+         
+             默认使用AverageAllocationJobShardingStrategy分片策略。
+
+      数据库曾片的分片方案：
+
+             
 </pre>
