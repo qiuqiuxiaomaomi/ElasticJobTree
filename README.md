@@ -53,3 +53,25 @@ ElasticJob主要功能：
       13）Spring支持
       15）提供运维界面，可以管理作业和注册中心
 </pre>
+
+<pre>
+Elastic Job
+
+      Elastic底层的任务调度还是使用的quartz，通过zookeeper来动态给job节点分片。
+
+      使用elastic-job开发的作业都是zookeeper的客户端，比如我希望3台机器跑job，我们将任务
+      分成3片，框架通过zk的协调，最终会让3台机器分别分配到0,1,2的任务片，比如server0-->0，server1-->1，server2-->2，当server0执行时，可以只查询id%3==0的用户，server1执行时，只查询id%3==1的用户，server2执行时，只查询id%3==2的用户。
+
+      任务部署多节点引发重复执行
+
+          在上面的基础上，我们再增加server3，此时，server3分不到任务分片，因为只有3片，已
+      经分完了。没有分到任务分片的作业程序将不执行。
+ 
+          如果此时server2挂了，那么server2的分片项会分配给server3，server3有了分片，就会
+      替代server2执行。
+ 
+          如果此时server3也挂了，只剩下server0和server1了，框架也会自动把server3的分片随
+      机分配给server0或者server1，可能会这样，server0-->0，server1-->1,2。
+
+          这种特性称之为弹性扩容，即elastic-job名称的由来
+</pre>
