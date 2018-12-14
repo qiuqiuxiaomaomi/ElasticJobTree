@@ -55,8 +55,4 @@ public class ElasticJobHandler {
 
         new SpringJobScheduler(new CommonSimpleElasticJob(), regCenter, jobConfig, jobEventConfiguration, elasticJobListener).init();
     }
-
-    public void deleteJob(String jobName){
-
-    }
 }

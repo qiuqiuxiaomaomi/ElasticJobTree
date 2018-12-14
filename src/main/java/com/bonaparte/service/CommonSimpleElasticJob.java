@@ -6,6 +6,7 @@ import com.bonaparte.util.CronUtils;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by yangmingquan on 2018/9/11.
  */
+@Service
 public class CommonSimpleElasticJob implements SimpleJob {
     @Autowired
     ElasticJobHandler elasticJobHandler;
@@ -30,6 +32,9 @@ public class CommonSimpleElasticJob implements SimpleJob {
                 shardingContext.getShardingParameter(),
                 shardingContext.getJobName(),
                 shardingContext.getJobParameter()));
+
+        //根据分片项获取数据
+        //执行业务逻辑
     }
 
     public void scanAddJob() {
@@ -47,7 +52,7 @@ public class CommonSimpleElasticJob implements SimpleJob {
             } else {
                 cron = CronUtils.getCron(new Date(jobTask.getSendTime()));
             }
-            elasticJobHandler.addJob(jobName, cron, 1, String.valueOf(jobTask.getId()));
+            elasticJobHandler.addJob(jobName, cron, 5, String.valueOf(jobTask.getId()));
         });
     }
 }

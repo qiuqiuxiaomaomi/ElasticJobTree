@@ -5,10 +5,10 @@
         <!--
           WARNING - @mbggenerated
         -->
-        <id column="id" property="id" jdbcType="BIGINTEGER" />
+        <id column="id" property="id" jdbcType="BIGINT" />
         <result column="content" property="content" jdbcType="VARCHAR" />
         <result column="status" property="status" jdbcType="INTEGER" />
-        <result column="sendTime" property="sendTime" jdbcType="BIGINTEGER"/>
+        <result column="send_time" property="sendTime" jdbcType="BIGINT"/>
     </resultMap>
 
     <select id="findAll" resultMap="BaseResultMap" parameterType="com.bonaparte.entity.TaskRepository">

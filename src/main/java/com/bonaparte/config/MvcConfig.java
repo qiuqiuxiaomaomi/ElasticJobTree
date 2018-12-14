@@ -90,15 +90,4 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registrationBean.setUrlPatterns(urlPatterns);
         return registrationBean;
     }
-
-    /**
-     * 配置文件上传bean
-     * @return
-     */
-    @Bean(name = "multipartResolver")
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setDefaultEncoding("UTF-8");
-        return multipartResolver;
-    }
 }

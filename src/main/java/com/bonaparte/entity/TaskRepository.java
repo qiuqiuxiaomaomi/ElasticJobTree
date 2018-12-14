@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "task_repository")
 public class TaskRepository {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String content;
