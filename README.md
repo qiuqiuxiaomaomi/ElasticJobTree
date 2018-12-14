@@ -156,3 +156,9 @@ Zookeeper分片
 
              
 </pre>
+
+运行图
+
+![](https://i.imgur.com/1qebpAu.png)
+
+![](https://i.imgur.com/MVW2M0D.png)
